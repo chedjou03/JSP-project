@@ -7,6 +7,6 @@
 		<title>Hello world</title>
 	</head>
 	<body>
-		<h3>Hello world Java</h3>
+		<h3>Hello world Java test</h3>
 	</body>
 </html>
