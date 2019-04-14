@@ -18,16 +18,32 @@
 			<b>Favorite Language:</b> ${param.favoriteLanguage}
 			<br>
 			<b>Favorite Js Library:</b>
-			<ul>
+			<ul id = "favJsLibraryId">
 				<% 
 					String[] favJSLibraries = request.getParameterValues("favoriteJavaScriptLibrary"); 
-					for(String tempLibrary : favJSLibraries)
+					if(favJSLibraries != null && favJSLibraries.length > 0)
 					{
-						out.println("<li>" + tempLibrary + "</li>");
+						for(String tempLibrary : favJSLibraries)
+						{
+							out.println("<li>" + tempLibrary + "</li>");
+						}
 					}
 				%>
 			</ul>
-			
+			<%
+				String favLanguage = request.getParameter("favoriteLanguage");
+				String firstName = request.getParameter("firstName");
+				String lastName = request.getParameter("lastName");
+				Cookie theFavLangCookie = new Cookie("myJSPapp.favoriteLanguage",favLanguage);
+				Cookie theFirstNameCookie = new Cookie("myJSPapp.firstName",firstName);
+				Cookie theLastNameCookie = new Cookie("myJSPapp.lastName",lastName);
+				theFavLangCookie.setMaxAge(60*60*24*365);
+				theFirstNameCookie.setMaxAge(60*60*24*365);
+				theLastNameCookie.setMaxAge(60*60*24*365);
+				response.addCookie(theFavLangCookie);
+				response.addCookie(theFirstNameCookie);
+				response.addCookie(theLastNameCookie);
+			%>
 		</div>
 		<jsp:include page = "myFooter.jsp" />
 	</body>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,8 +11,10 @@
 	<body>
 		<jsp:include page = "myHeader.jsp" />
 		<div align = "center">
+			
 			<h2>STUDENT REGISTRATION FORM</h2>
 			<form action = "student-response.jsp">
+			<% session.setAttribute("userName", "Simplice"); %>
 				First Name: <input type = "text" name = "firstName"/>
 				<br><br>
 				Last Name: <input type = "text" name = "lastName"/>
@@ -40,6 +42,34 @@
 				<br><br>
 				<input type = "submit" value = "submit"/>
 			</form>
+			<form action="Student-Form.jsp">
+				Add new Items: <input type = "text" name = "theItem" />
+				<br>
+				<input type = "submit" value = "add" />
+			</form>
+				Item entered : <%= request.getParameter("theItem") %>
+				<br>
+				<%
+					List<String> items = (List<String>) session.getAttribute("myToDoList");
+					if(items == null)
+					{
+						items = new ArrayList<String>();
+						session.setAttribute("myToDoList", items);
+					}
+					String theItem = request.getParameter("theItem");
+					if(theItem != null && !((theItem.trim()).isEmpty())){
+						items.add(theItem);
+						response.sendRedirect("Student-Form.jsp"); 
+					}
+				%>
+				<b>To Do List:</b>
+				<ol id = "toDoListId">
+					<%
+						for(String anItem : items){
+							out.println("<li>" + anItem + "</li>");
+						}		
+					%>
+				</ol>
 		</div>
 		<jsp:include page = "myFooter.jsp" />
 	</body>
