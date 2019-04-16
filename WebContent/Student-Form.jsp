@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"  %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,7 +13,11 @@
 	<body>
 		<jsp:include page = "myHeader.jsp" />
 		<div align = "center">
-			
+		<% 	List<String> myCountries = new ArrayList<String>(Arrays.asList("","France","Cameroon","USA","Canada","Italy","Germany")); 
+		   	//String[] myCountries = {"France","Cameroon","USA","Canada","Italy","Germany"};
+			pageContext.setAttribute("countries", myCountries);
+			String test = "France";
+		%>	
 			<h2>STUDENT REGISTRATION FORM</h2>
 			<form action = "student-response.jsp">
 			<% session.setAttribute("userName", "Simplice"); %>
@@ -20,12 +26,10 @@
 				Last Name: <input type = "text" name = "lastName"/>
 				<br><br>
 				Country: <select name = "country">
-								<option></option>
-								<option>France</option>
-								<option>Cameroon</option>
-								<option>USA</option>
-								<option>Canada</option>
-								<option>Italy</option>
+								<c:forEach var = "tempCountry" items = "${countries}">
+									<c:if test=" not empty ${tempCountry} "> Mouf</c:if>
+									<option>${tempCountry}</option>
+								</c:forEach>
 						 </select>
 				<br><br>
 				Favorite Programming Language:
