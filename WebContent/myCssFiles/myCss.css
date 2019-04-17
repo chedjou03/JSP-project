@@ -14,3 +14,8 @@
 	text-align: center;
   	list-style-position: inside;	
 }
+
+#stickToTheRight {
+        width: 300px;
+        float: right;
+}

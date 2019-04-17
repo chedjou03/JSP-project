@@ -2,6 +2,7 @@
 <%@ page import = "java.util.*" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"  %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,33 +13,36 @@
 	
 	<body>
 		<jsp:include page = "myHeader.jsp" />
+		<c:set var = "theLocal" value = "${ not empty param.theLocal ? param.theLocal : pageContext.request.local}" scope = "session"/>
+		<fmt:setLocale value = "${theLocal}"/>
+		<fmt:setBundle basename="com.JspProject.jspBeans.I18N.resources.myLabels"/>
 		<div align = "center">
 		<% 	List<String> myCountries = new ArrayList<String>(Arrays.asList("","France","Cameroon","USA","Canada","Italy","Germany")); 
 		   	//String[] myCountries = {"France","Cameroon","USA","Canada","Italy","Germany"};
 			pageContext.setAttribute("countries", myCountries);
 			String test = "France";
 		%>	
-			<h2>STUDENT REGISTRATION FORM</h2>
+			<h2><fmt:message key = "label.studentRegistrationForm"/></h2>
 			<form action = "student-response.jsp">
 			<% session.setAttribute("userName", "Simplice"); %>
-				First Name: <input type = "text" name = "firstName"/>
+				<fmt:message key = "label.firstName"/>: <input type = "text" name = "firstName"/>
 				<br><br>
-				Last Name: <input type = "text" name = "lastName"/>
+				<fmt:message key = "label.lastName"/>: <input type = "text" name = "lastName"/>
 				<br><br>
-				Country: <select name = "country">
+				<fmt:message key = "label.country"/>: <select name = "country">
 								<c:forEach var = "tempCountry" items = "${countries}">
 									<c:if test=" not empty ${tempCountry} "> Mouf</c:if>
 									<option>${tempCountry}</option>
 								</c:forEach>
 						 </select>
 				<br><br>
-				Favorite Programming Language:
+				<fmt:message key = "label.favoriteProgrammingLanguage"/>
 				<input type = "radio" name="favoriteLanguage"  value = "Java" />Java
 				<input type = "radio" name="favoriteLanguage"  value = "PHP" />PHP
 				<input type = "radio" name="favoriteLanguage"  value = "C#" />C#
 				<input type = "radio" name="favoriteLanguage"  value = "C++" />C++
 				<br><br>
-				Favorite JavaScript Library:
+				<fmt:message key = "label.favoriteJavaScriptLibrary"/>
 				<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "Jquery" />Jquery
 				<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "KnockOut" />KnockOut
 				<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "Bootstrap" />Bootstrap

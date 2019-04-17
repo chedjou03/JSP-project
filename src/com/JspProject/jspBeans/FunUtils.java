@@ -1,4 +1,4 @@
-package com.JavaBeanClass.jsp;
+package com.JspProject.jspBeans;
 
 public class FunUtils {
 	
