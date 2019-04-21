@@ -7,7 +7,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="myCssFiles/myCss.css">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="MyCss/myCss.css">
+		<link rel="stylesheet" type="text/css" href="Css/bootstrap.min.css">
+		<script  src="Js/jquery-3.3.1.min.js"></script>
+   		<script  src="Js/knockout-3.4.2.js"></script>
 		<title>Student form</title>
 	</head>
 	
@@ -22,33 +26,45 @@
 			pageContext.setAttribute("countries", myCountries);
 			String test = "France";
 		%>	
-			<h2><fmt:message key = "label.studentRegistrationForm"/></h2>
-			<form action = "student-response.jsp">
-			<% session.setAttribute("userName", "Simplice"); %>
-				<fmt:message key = "label.firstName"/>: <input type = "text" name = "firstName"/>
-				<br><br>
-				<fmt:message key = "label.lastName"/>: <input type = "text" name = "lastName"/>
-				<br><br>
-				<fmt:message key = "label.country"/>: <select name = "country">
+			<h2><span class="badge badge-secondary"><fmt:message key = "label.studentRegistrationForm"/></span></h2>
+			<form  class="form-horizontal" action = "student-response.jsp">
+				<% session.setAttribute("userName", "Simplice"); %>
+				<div class="form-group col-4">
+					<label class="control-label" ><fmt:message key = "label.firstName"/>:</label> 
+					<input type = "text" name = "firstName" class="form-control" placeholder="Enter First Name"/>	
+				</div>
+				
+				<div class="form-group col-4">
+					<fmt:message key = "label.lastName"/>: 
+					<input type = "text" name = "lastName" class="form-control"/>
+			    </div>
+				
+				<div class="form-group col-3">
+					<fmt:message key = "label.country"/>: <select name = "country" class="form-control">
 								<c:forEach var = "tempCountry" items = "${countries}">
-									<c:if test=" not empty ${tempCountry} "> Mouf</c:if>
 									<option>${tempCountry}</option>
 								</c:forEach>
 						 </select>
+				</div>
+				
+				<div class="form-group">
+					<fmt:message key = "label.favoriteProgrammingLanguage"/>
+					<input type = "radio" name="favoriteLanguage"  value = "Java" />Java
+					<input type = "radio" name="favoriteLanguage"  value = "PHP"  />PHP
+					<input type = "radio" name="favoriteLanguage"  value = "C#"  />C#
+					<input type = "radio" name="favoriteLanguage"  value = "C++"  />C++
+				</div>
+				
+				<div class="form-group">
+					<fmt:message key = "label.favoriteJavaScriptLibrary"/>
+					<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "Jquery" />Jquery
+					<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "KnockOut" />KnockOut
+					<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "Bootstrap" />Bootstrap
+					<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "React" />React
+				</div>
+				
 				<br><br>
-				<fmt:message key = "label.favoriteProgrammingLanguage"/>
-				<input type = "radio" name="favoriteLanguage"  value = "Java" />Java
-				<input type = "radio" name="favoriteLanguage"  value = "PHP" />PHP
-				<input type = "radio" name="favoriteLanguage"  value = "C#" />C#
-				<input type = "radio" name="favoriteLanguage"  value = "C++" />C++
-				<br><br>
-				<fmt:message key = "label.favoriteJavaScriptLibrary"/>
-				<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "Jquery" />Jquery
-				<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "KnockOut" />KnockOut
-				<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "Bootstrap" />Bootstrap
-				<input type = "checkbox" name="favoriteJavaScriptLibrary"  value = "React" />React
-				<br><br>
-				<input type = "submit" value = "submit"/>
+				<input type = "submit" value = "submit" class="btn btn-default" />
 			</form>
 			<form action="Student-Form.jsp">
 				Add new Items: <input type = "text" name = "theItem" />
