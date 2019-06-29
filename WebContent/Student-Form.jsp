@@ -25,14 +25,23 @@
 		   	//String[] myCountries = {"France","Cameroon","USA","Canada","Italy","Germany"};
 			pageContext.setAttribute("countries", myCountries);
 			String test = "France";
+			String testPlaceHolder = "Enter " ; 
 		%>	
+		
 			<h2><span class="badge badge-secondary"><fmt:message key = "label.studentRegistrationForm"/></span></h2>
-			<form  class="form-horizontal" action = "student-response.jsp">
+			<form  class = "form-horizontal" action = "student-response.jsp">
 				<% session.setAttribute("userName", "Simplice"); %>
-				<div class="form-group col-4">
+				<div class="form-group col-4 row">
 					<label class="control-label" ><fmt:message key = "label.firstName"/>:</label> 
-					<input type = "text" name = "firstName" class="form-control" placeholder="Enter First Name"/>	
+					<input type = "text" name = "firstName" class="form-control" placeholder="<%= testPlaceHolder %>"/>	
 				</div>
+				
+				<div class="form-group row " >
+    				<label for="inputEmail3" class="col-sm-4 col-form-label">Email</label>
+    				<div class="col-sm-4">
+      					<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+    				</div>
+  				</div>
 				
 				<div class="form-group col-4">
 					<fmt:message key = "label.lastName"/>: 
